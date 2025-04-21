@@ -1,0 +1,88 @@
+import React from "react";
+import { StyleSheet } from "react-native";
+import { Colors } from "@/constants/Colors";
+
+export const styles = StyleSheet.create({
+  container: {
+    margin: 0,
+    padding: 0,
+    flex: 1,
+    alignItems: "center",
+  },
+  header: {
+    margin: 0,
+    padding: 0,
+    alignItems: "flex-end",
+    justifyContent: "flex-start",
+    width: "100%",
+    height: 150,
+  },
+  logo: {
+    margin: 0,
+    padding: 2,
+    width: "100%",
+    flex: 1,
+    resizeMode: "contain",
+    borderWidth: 2,
+    borderColor: "#000",
+    borderStyle:'solid',
+    backgroundColor: "#000",
+  },
+  warning: {
+    backgroundColor: "#B80000FF",
+    color: "#ffffff",
+    // textTransform: "uppercase",
+    paddingVertical: 3,
+    paddingHorizontal: 15,
+    borderRadius: 8,
+    margin: 6,
+    fontSize: 10,
+  },
+  content: {
+    flex: 1,
+    width: "100%",
+    marginTop: -24,
+  },
+  authContainer: {
+    width: "100%",
+    margin: 0,
+    padding: 20,
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#ffffff",
+    // borderColor: "black",
+    // borderWidth: 1,
+    // borderStyle: "solid",
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+  },
+  authTitle: {
+    fontSize: 26,
+    fontWeight: 600,
+    color: "#333333",
+    marginBottom: 30,
+  },
+  authInfoLinkText: {
+    fontSize: 14,
+    fontWeight: 600,
+    color: "#203EFFFF",
+    marginBottom: 30,
+    marginTop: 40,
+  },
+  errorBox: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    margin: 0,
+    padding: 0,
+    paddingBottom: 15,
+    color: "#FF0000FF",
+  },
+  errorText: {
+    fontSize: 10,
+    color: "#FF0000FF",
+  },
+});

@@ -8,7 +8,6 @@ import {
   Button,
 } from "react-native";
 import { styles } from "../../styles/tabs";
-import { Picker } from "@react-native-picker/picker";
 import * as SecureStore from "expo-secure-store";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
@@ -41,7 +40,7 @@ interface PartnerParams {
   ];
 }
 
-export default function HomeScreen() {
+export default function FavoritesScreen() {
   const [isLoading, setIsLoading] = useState<boolean>(false),
     [user, setUser] = useState<{ id: string; name: string }>(),
     [search, setSearch] = useState<string>(""),
@@ -328,40 +327,10 @@ export default function HomeScreen() {
   return (
     <View style={styles.tabContainer}>
       <WarningModal></WarningModal>
-      <Text style={styles.parceirosTitle}>Lista de Parceiros</Text>
-      <View style={styles.filterContainer}>
-        <View style={styles.searchContainer}>
-          <Ionicons
-            name="search"
-            size={20}
-            color="gray"
-            style={styles.searchIcon}
-          />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Buscar..."
-            value={search}
-            onChangeText={setSearch}
-          />
-        </View>
-
-        <View style={styles.pickerContainer}>
-          <Picker
-            selectedValue={selectedDiscount}
-            onValueChange={(itemValue: any) => setSelectedDiscount(itemValue)}
-            style={styles.picker}
-          >
-            <Picker.Item label={`Todos`} value={`0`} />
-            {discountList &&
-              discountList.map((e: string, y: number) => (
-                <Picker.Item label={`${e}% OFF`} value={`${e}`} key={y} />
-              ))}
-          </Picker>
-        </View>
-      </View>
+      <Text style={styles.parceirosTitle}>Seus parceiros favoritos</Text>
 
       {!isLoading ? (
-        dataCopy && dataCopy.length > 0 ? (
+        dataCopy && favorites && dataCopy.length > 0 && favorites.length > 0 ? (
           <FlatList
             style={{ width: "100%", padding: 20 }}
             data={dataCopy}
@@ -370,13 +339,17 @@ export default function HomeScreen() {
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => {
               const isFavorite = favorites.includes(item.id.toString());
-              return (
-                <PartnerCard
-                  item={item}
-                  isFavorite={isFavorite}
-                  post={postFavorites}
-                ></PartnerCard>
-              );
+              if (isFavorite) {
+                return (
+                  <PartnerCard
+                    item={item}
+                    isFavorite={isFavorite}
+                    post={postFavorites}
+                  ></PartnerCard>
+                );
+              } else {
+                return null;
+              }
             }}
           />
         ) : (
