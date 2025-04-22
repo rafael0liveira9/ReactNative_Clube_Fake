@@ -126,7 +126,8 @@ export default function RegisterScreen() {
       }
     }
     if (email && email.length > 0) {
-      const emailRegex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+$/;
+      const emailRegex =
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
 
       if (!emailRegex.test(email)) {
         updatedErrors.push("email");
