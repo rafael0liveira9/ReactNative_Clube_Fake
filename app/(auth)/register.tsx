@@ -44,14 +44,23 @@ export default function RegisterScreen() {
     setIsLoading(true);
     const res = await register({ email, password, name });
 
+    console.log("user", res?.data?.user);
+    console.log("client", res?.data?.client);
+
     if (res?.data) {
       try {
+        await SecureStore.setItemAsync(
+          "userId",
+          res?.data?.user?.id.toString()
+        );
         await SecureStore.setItemAsync("userToken", res?.data?.user?.token);
+        await SecureStore.setItemAsync("userEmail", res?.data?.user?.email);
         await SecureStore.setItemAsync("userName", res?.data?.client?.name);
         await SecureStore.setItemAsync(
           "userType",
           res?.data?.user?.typeId.toString()
         );
+
         Toast.show({
           type: "success",
           text1: "✅ Cadastro efetuado com sucesso.",
@@ -246,10 +255,15 @@ export default function RegisterScreen() {
             );
           })}
       </View>
-      <Button onPress={handleRegister}>
-        <ButtonText>Salvar</ButtonText>
-      </Button>
-
+      {isLoading ? (
+        <Button>
+          <ButtonText>Enviando...</ButtonText>
+        </Button>
+      ) : (
+        <Button onPress={handleRegister}>
+          <ButtonText>Salvar</ButtonText>
+        </Button>
+      )}
       <Text style={styles.authInfoLinkText} onPress={handleAlready}>
         Já tenho cadastro.
       </Text>

@@ -198,5 +198,6 @@ separatorView: {
     gap: 10,
     paddingVertical: 30,
     paddingHorizontal: 20,
+
 }
 });
